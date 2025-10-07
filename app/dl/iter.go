@@ -25,7 +25,6 @@ import (
 	"github.com/iyear/tdl/core/util/tutil"
 	"github.com/iyear/tdl/pkg/tmessage"
 	"github.com/iyear/tdl/pkg/tplfunc"
-	"github.com/iyear/tdl/pkg/utils"
 )
 
 const tempExt = ".tmp"
@@ -36,7 +35,7 @@ type fileTemplate struct {
 	MessageDate  int64
 	FileName     string
 	FileCaption  string
-	FileSize     string
+	FileSize     int64
 	DownloadDate int64
 }
 
@@ -194,7 +193,7 @@ func (i *iter) processSingle(message *tg.Message, from peers.Peer) (bool, bool) 
 		MessageDate:  int64(message.Date),
 		FileName:     item.Name,
 		FileCaption:  message.Message,
-		FileSize:     utils.Byte.FormatBinaryBytes(item.Size),
+		FileSize:     item.Size,
 		DownloadDate: time.Now().Unix(),
 	})
 	if err != nil {
